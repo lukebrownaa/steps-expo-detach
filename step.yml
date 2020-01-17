@@ -27,13 +27,13 @@ inputs:
       title: Expo CLI version
       summary: Specify the Expo CLI version to install.
       description: |-
-        Specify the Expo CLI version to install.  
+        Specify the Expo CLI version to install.
         The Expo CLI ejects your project and creates Xcode and Android Studio projects for your app.
 
         [https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli](https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli)
-        
+
         A couple of examples:
-        
+
         * "3.0.0"
         * latest
       is_required: "true"
@@ -44,10 +44,10 @@ inputs:
       description: |-
         Your account's username for `https://expo.io/` .
 
-        In case of React Native project __using Expo Kit__ library (any .js file imports expo),  
+        In case of React Native project __using Expo Kit__ library (any .js file imports expo),
         the `user_name` and `password` inputs are __required__.
 
-        If you provide these inputs the step will run: `expo eject --eject-method expoKit`,  
+        If you provide these inputs the step will run: `expo eject --eject-method expoKit`,
         otherwise: `expo eject --eject-method bare`.
 
         **NOTE:** You need to use your username and not your e-mail address.
@@ -58,12 +58,18 @@ inputs:
       description: |-
         Your password for `https://expo.io/` .
 
-        In case of React Native project __using Expo Kit__ library (any .js file imports expo),  
+        In case of React Native project __using Expo Kit__ library (any .js file imports expo),
         the `user_name` and `password` inputs are __required__.
 
-        If you provide these inputs the step will run: `expo eject --eject-method expoKit`,  
+        If you provide these inputs the step will run: `expo eject --eject-method expoKit`,
         otherwise: `expo eject --eject-method bare`.
       is_sensitive: true
+  - release_channel: ""
+    opts:
+      title: Release channel for published project
+      summary: Release channel for published project
+      description: |-
+        Release channel applied when using expo publish
   - run_publish: "no"
     opts:
       title: Run expo publish after eject?
@@ -71,7 +77,7 @@ inputs:
       description: |-
         Should the step run `expo publish` after eject?
 
-        In case of React Native project using Expo Kit library (any .js file imports expo),  
+        In case of React Native project using Expo Kit library (any .js file imports expo),
         `expo publis` command generates the:
 
         - ./android/app/src/main/assets/shell-app-manifest.json

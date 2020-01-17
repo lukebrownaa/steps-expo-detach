@@ -23,6 +23,7 @@ type Config struct {
 	UserName                   string          `env:"user_name"`
 	Password                   stepconf.Secret `env:"password"`
 	RunPublish                 string          `env:"run_publish"`
+	ReleaseChannel             string          `env:"release_channel"`
 	OverrideReactNativeVersion string          `env:"override_react_native_version"`
 }
 
@@ -99,8 +100,12 @@ func (e Expo) eject() error {
 	return cmd.Run()
 }
 
-func (e Expo) publish() error {
-	args := []string{"publish", "--non-interactive"}
+func (e Expo) publish(releaseChannel) error {
+	if releaseChannel != "" {
+		args := []string{"publish", "--non-interactive", "--release-channel " + releaseChannel}
+	} else {
+		args := []string{"publish", "--non-interactive"}
+	}
 
 	cmd := command.New("expo", args...)
 	cmd.SetStdout(os.Stdout)
@@ -248,9 +253,16 @@ func main() {
 		fmt.Println()
 		log.Infof("Running expo publish")
 
-		if err := e.publish(); err != nil {
-			failf("Failed to publish project: %s", err)
+		if cfg.ReleaseChannel != "" {
+			if err := e.publish(); err != nil {
+				failf("Failed to publish project: %s", err)
+			}
+		} else {
+			if err := e.publish(); err != nil {
+				failf("Failed to publish project: %s", err)
+			}
 		}
+
 	}
 
 	if cfg.OverrideReactNativeVersion != "" {
