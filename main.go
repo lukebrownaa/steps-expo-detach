@@ -100,7 +100,7 @@ func (e Expo) eject() error {
 	return cmd.Run()
 }
 
-func (e Expo) publish(releaseChannel) error {
+func (e Expo) publish(releaseChannel string) error {
 	if releaseChannel != "" {
 		args := []string{"publish", "--non-interactive", "--release-channel " + releaseChannel}
 	} else {
