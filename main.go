@@ -254,11 +254,11 @@ func main() {
 		log.Infof("Running expo publish")
 
 		if cfg.ReleaseChannel != "" {
-			if err := e.publish(); err != nil {
+			if err := e.publish(fg.ReleaseChannel); err != nil {
 				failf("Failed to publish project: %s", err)
 			}
 		} else {
-			if err := e.publish(); err != nil {
+			if err := e.publish(""); err != nil {
 				failf("Failed to publish project: %s", err)
 			}
 		}
